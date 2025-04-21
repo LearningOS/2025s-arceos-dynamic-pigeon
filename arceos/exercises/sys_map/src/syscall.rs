@@ -4,10 +4,13 @@ use core::ffi::{c_void, c_char, c_int};
 use axhal::arch::TrapFrame;
 use axhal::trap::{register_trap_handler, SYSCALL};
 use axerrno::LinuxError;
+use memory_addr::{MemoryAddr, VirtAddr, VirtAddrRange};
 use axtask::current;
 use axtask::TaskExtRef;
 use axhal::paging::MappingFlags;
 use arceos_posix_api as api;
+use arceos_posix_api::config::PHYS_VIRT_OFFSET;
+use crate::task;
 
 const SYS_IOCTL: usize = 29;
 const SYS_OPENAT: usize = 56;
@@ -132,15 +135,76 @@ fn handle_syscall(tf: &TrapFrame, syscall_num: usize) -> isize {
 }
 
 #[allow(unused_variables)]
-fn sys_mmap(
+pub(crate) fn sys_mmap(
     addr: *mut usize,
     length: usize,
     prot: i32,
     flags: i32,
     fd: i32,
-    _offset: isize,
+    offset: isize,
 ) -> isize {
-    unimplemented!("no sys_mmap!");
+    debug!(
+        "sys_mmap <= {:#x} {} {:#x} {} {} {}",
+        addr as usize, length, prot, flags, fd, offset
+    );
+    syscall_body!(sys_mmap, {
+        let task = current();
+        let task_ext = task.task_ext();
+        let mut aspace = task_ext.aspace.lock();
+        let permission_flags = MmapProt::from_bits_truncate(prot);
+        // TODO: check illegal flags for mmap
+        // An example is the flags contained none of MAP_PRIVATE, MAP_SHARED, or MAP_SHARED_VALIDATE.
+        let map_flags = MmapFlags::from_bits_truncate(flags);
+
+        let start_addr = if map_flags.contains(MmapFlags::MAP_FIXED) {
+            VirtAddr::from(addr as usize)
+        } else {
+            aspace
+                .find_free_area(
+                    VirtAddr::from(addr as usize),
+                    length,
+                    VirtAddrRange::new(aspace.base(), aspace.end()),
+                )
+                .or(aspace.find_free_area(
+                    aspace.base(),
+                    length,
+                    VirtAddrRange::new(aspace.base(), aspace.end()),
+                ))
+                .ok_or(LinuxError::ENOMEM)?
+        };
+
+        let populate = if fd == -1 {
+            false
+        } else {
+            !map_flags.contains(MmapFlags::MAP_ANONYMOUS)
+        };
+
+        let end_addr = (start_addr + length).align_up_4k();
+
+        aspace.map_alloc(
+            start_addr.align_down_4k(),
+            end_addr
+                .sub(start_addr.align_down_4k().as_usize())
+                .as_usize(),
+            permission_flags.into(),
+            populate,
+        )?;
+
+
+        if offset < 0 {
+            return Err(LinuxError::EINVAL);
+        }
+
+        if populate {
+            let file_inner = arceos_posix_api::read_file(fd, offset as usize, length)?;
+
+            aspace.write(start_addr, &file_inner)?;
+        }
+
+        drop(aspace);
+
+        Ok(start_addr.as_usize() as isize)
+    })
 }
 
 fn sys_openat(dfd: c_int, fname: *const c_char, flags: c_int, mode: api::ctypes::mode_t) -> isize {

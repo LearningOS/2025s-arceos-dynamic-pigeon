@@ -303,7 +303,6 @@ pub(crate) fn set_current_dir(path: &str) -> AxResult {
 
 pub(crate) fn rename(old: &str, new: &str) -> AxResult {
     if parent_node_of(None, new).lookup(new).is_ok() {
-        warn!("dst file already exist, now remove it");
         remove_file(None, new)?;
     }
     parent_node_of(None, old).rename(old, new)

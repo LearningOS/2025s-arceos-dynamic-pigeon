@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="EMPTY_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$">
+      <sourceFolder url="file://$MODULE_DIR$/arceos/api/arceos_api/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/api/arceos_posix_api/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/api/axfeat/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/exercises/alt_alloc/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/exercises/print_with_color/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/exercises/ramfs_rename/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/exercises/simple_hv/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/exercises/support_hashmap/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/exercises/sys_map/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/alt_axalloc/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axalloc/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axconfig/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axdisplay/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axdma/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axdriver/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axfs/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axfs/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axhal/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axlog/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axmm/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axnet/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axruntime/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axsync/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/axtask/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/bump_allocator/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/elf/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/modules/riscv_vcpu/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/payload/origin/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/payload/skernel/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/payload/skernel2/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tools/bwbench_client/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tools/deptool/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tools/raspi4/chainloader/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tools/raspi4/chainloader/tests" isTestSource="true" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/h_1_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/h_2_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/h_3_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/h_4_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/m_1_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/m_1_1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/m_2_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/m_3_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/m_3_1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/u_1_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/u_2_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/u_3_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/u_4_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/u_5_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/u_6_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/u_6_1/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/u_7_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/tour/u_8_0/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/ulib/axlibc/src" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/arceos/ulib/axstd/src" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/arceos/target" />
+      <excludeFolder url="file://$MODULE_DIR$/arceos/tools/bwbench_client/target" />
+      <excludeFolder url="file://$MODULE_DIR$/arceos/tools/deptool/target" />
+      <excludeFolder url="file://$MODULE_DIR$/arceos/tools/raspi4/chainloader/target" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

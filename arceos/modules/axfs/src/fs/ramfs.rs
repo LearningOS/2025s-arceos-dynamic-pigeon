@@ -1,38 +1,36 @@
-extern crate alloc;
-
 use alloc::sync::Arc;
-use axfs_ramfs::{DirNode, RamFileSystem};
+use axfs_ramfs::DirNode;
 use axfs_vfs::{VfsError, VfsNodeOps, VfsNodeRef, VfsNodeType, VfsOps, VfsResult};
-use std::os::arceos::api::fs::{AxDisk, MyFileSystemIf};
-use std::os::arceos::modules::axlog::{error, warn};
+use alloc::vec;
 
-struct MyFileSystemIfImpl {
-    file_sys: RamFileSystem
+pub use axfs_ramfs::RamFileSystem;
+
+use crate::root::{create_file, lookup};
+
+pub struct RamFs {
+    file_sys: RamFileSystem,
 }
 
 struct DirWrapper {
-    dir: Arc<dyn VfsNodeOps>
+    dir: Arc<dyn VfsNodeOps>,
 }
 
-#[crate_interface::impl_interface]
-impl MyFileSystemIf for MyFileSystemIfImpl {
-    fn new_myfs(_disk: AxDisk) -> Arc<dyn VfsOps> {
+impl RamFs {
+    pub fn new() -> Self {
         let file_sys = RamFileSystem::new();
-        let myfs = MyFileSystemIfImpl {
-            file_sys
-        };
-        Arc::new(myfs)
+        let myfs = RamFs { file_sys };
+        myfs
     }
 }
 
-impl VfsOps for MyFileSystemIfImpl {
+impl VfsOps for RamFs {
     fn mount(&self, path: &str, mount_point: VfsNodeRef) -> VfsResult {
         self.file_sys.mount(path, mount_point)
     }
 
     fn root_dir(&self) -> VfsNodeRef {
         Arc::new(DirWrapper {
-            dir: self.file_sys.root_dir()
+            dir: self.file_sys.root_dir(),
         })
     }
 }
@@ -50,8 +48,7 @@ impl VfsNodeOps for DirWrapper {
     }
     fn rename(&self, src_path: &str, dst_path: &str) -> VfsResult {
         let src = self.dir.clone().lookup(src_path)?;
-        let dst = self.dir.create(dst_path, VfsNodeType::File)?;
-        let dst = self.dir.clone().lookup(dst_path)?;
+        let dst = create_file(None, dst_path)?;
         self.dir.remove(src_path)?;
         let len = src.get_attr()?.size() as usize;
         let mut buf = vec![0u8; len];

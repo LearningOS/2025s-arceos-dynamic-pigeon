@@ -1,0 +1,50 @@
+thread 'rustc' panicked at compiler/rustc_metadata/src/rmeta/decoder/cstore_impl.rs:244:1:
+DefId(4:78 ~ allocator[3302]::PageAllocator::PAGE_SIZE) does not have a "fn_arg_names"
+stack backtrace:
+   0:     0x7f6c1ee62f25 - std::backtrace::Backtrace::create::hecd2f73b2ce7b07a
+   1:     0x7f6c1d5c7695 - std::backtrace::Backtrace::force_capture::h170b9a096c05276d
+   2:     0x7f6c1c743d47 - std[23d648ca06a6b5c2]::panicking::update_hook::<alloc[5896b17b70d00093]::boxed::Box<rustc_driver_impl[c6327b079c7bb00b]::install_ice_hook::{closure#0}>>::{closure#0}
+   3:     0x7f6c1d5deab8 - std::panicking::rust_panic_with_hook::h0a4b940661a26423
+   4:     0x7f6c1d5de887 - std::panicking::begin_panic_handler::{{closure}}::h72160a9fdca8fdc8
+   5:     0x7f6c1d5dc4c9 - std::sys::backtrace::__rust_end_short_backtrace::hb6826ea75cd9c94b
+   6:     0x7f6c1d5de554 - rust_begin_unwind
+   7:     0x7f6c1a498f63 - core::panicking::panic_fmt::h47b5abafd035aaaa
+   8:     0x7f6c1cca97c2 - rustc_metadata[e2ce326aece1cd9a]::rmeta::decoder::cstore_impl::provide_extern::fn_arg_names::{closure#2}
+   9:     0x7f6c1cca964e - rustc_metadata[e2ce326aece1cd9a]::rmeta::decoder::cstore_impl::provide_extern::fn_arg_names
+  10:     0x7f6c1f334fe9 - rustc_query_impl[a11ca8e41e94db86]::plumbing::__rust_begin_short_backtrace::<rustc_query_impl[a11ca8e41e94db86]::query_impl::fn_arg_names::dynamic_query::{closure#2}::{closure#0}, rustc_middle[d764cafae524af68]::query::erase::Erased<[u8; 16usize]>>.cold
+  11:     0x7f6c1e0a1055 - <rustc_query_impl[a11ca8e41e94db86]::query_impl::fn_arg_names::dynamic_query::{closure#2} as core[ad5a27a180104093]::ops::function::FnOnce<(rustc_middle[d764cafae524af68]::ty::context::TyCtxt, rustc_span[35307b2b70fcf344]::def_id::DefId)>>::call_once
+  12:     0x7f6c1e210015 - rustc_query_system[2ff07926b95779e9]::query::plumbing::try_execute_query::<rustc_query_impl[a11ca8e41e94db86]::DynamicConfig<rustc_query_system[2ff07926b95779e9]::query::caches::DefIdCache<rustc_middle[d764cafae524af68]::query::erase::Erased<[u8; 16usize]>>, false, false, false>, rustc_query_impl[a11ca8e41e94db86]::plumbing::QueryCtxt, true>
+  13:     0x7f6c1e20e5bb - rustc_query_impl[a11ca8e41e94db86]::query_impl::fn_arg_names::get_query_incr::__rust_end_short_backtrace
+  14:     0x7f6c1e215b23 - rustc_middle[d764cafae524af68]::query::plumbing::query_get_at::<rustc_query_system[2ff07926b95779e9]::query::caches::DefIdCache<rustc_middle[d764cafae524af68]::query::erase::Erased<[u8; 16usize]>>>
+  15:     0x7f6c1d1e51a0 - <rustc_resolve[2e8d4a957ac066c6]::late::LateResolutionVisitor>::try_lookup_name_relaxed
+  16:     0x7f6c1d1dd9d1 - <rustc_resolve[2e8d4a957ac066c6]::late::LateResolutionVisitor>::smart_resolve_report_errors
+  17:     0x7f6c1ad0e47c - <rustc_resolve[2e8d4a957ac066c6]::late::LateResolutionVisitor>::smart_resolve_path_fragment::{closure#0}
+  18:     0x7f6c1e96ead6 - <rustc_resolve[2e8d4a957ac066c6]::late::LateResolutionVisitor>::smart_resolve_path_fragment
+  19:     0x7f6c1e95fab6 - <rustc_resolve[2e8d4a957ac066c6]::late::LateResolutionVisitor>::resolve_expr
+  20:     0x7f6c1e95ec8a - <rustc_resolve[2e8d4a957ac066c6]::late::LateResolutionVisitor>::with_lifetime_rib::<(), <rustc_resolve[2e8d4a957ac066c6]::late::LateResolutionVisitor>::resolve_const_body::{closure#0}>
+  21:     0x7f6c1add4217 - <rustc_resolve[2e8d4a957ac066c6]::late::LateResolutionVisitor as rustc_ast[425c09b15625e00f]::visit::Visitor>::visit_item
+  22:     0x7f6c1f020f6f - <rustc_resolve[2e8d4a957ac066c6]::Resolver>::resolve_crate::{closure#0}
+  23:     0x7f6c1f01b340 - <rustc_resolve[2e8d4a957ac066c6]::Resolver>::resolve_crate
+  24:     0x7f6c1e32723e - rustc_interface[1a90780ba77f0571]::passes::resolver_for_lowering_raw
+  25:     0x7f6c1e32646b - rustc_query_impl[a11ca8e41e94db86]::plumbing::__rust_begin_short_backtrace::<rustc_query_impl[a11ca8e41e94db86]::query_impl::resolver_for_lowering_raw::dynamic_query::{closure#2}::{closure#0}, rustc_middle[d764cafae524af68]::query::erase::Erased<[u8; 16usize]>>
+  26:     0x7f6c1e326459 - <rustc_query_impl[a11ca8e41e94db86]::query_impl::resolver_for_lowering_raw::dynamic_query::{closure#2} as core[ad5a27a180104093]::ops::function::FnOnce<(rustc_middle[d764cafae524af68]::ty::context::TyCtxt, ())>>::call_once
+  27:     0x7f6c1f00597b - rustc_query_system[2ff07926b95779e9]::query::plumbing::try_execute_query::<rustc_query_impl[a11ca8e41e94db86]::DynamicConfig<rustc_query_system[2ff07926b95779e9]::query::caches::SingleCache<rustc_middle[d764cafae524af68]::query::erase::Erased<[u8; 16usize]>>, false, false, false>, rustc_query_impl[a11ca8e41e94db86]::plumbing::QueryCtxt, true>
+  28:     0x7f6c1f00540a - rustc_query_impl[a11ca8e41e94db86]::query_impl::resolver_for_lowering_raw::get_query_incr::__rust_end_short_backtrace
+  29:     0x7f6c1ebc276e - rustc_interface[1a90780ba77f0571]::interface::run_compiler::<core[ad5a27a180104093]::result::Result<(), rustc_span[35307b2b70fcf344]::ErrorGuaranteed>, rustc_driver_impl[c6327b079c7bb00b]::run_compiler::{closure#0}>::{closure#1}
+  30:     0x7f6c1ec9aed0 - std[23d648ca06a6b5c2]::sys::backtrace::__rust_begin_short_backtrace::<rustc_interface[1a90780ba77f0571]::util::run_in_thread_with_globals<rustc_interface[1a90780ba77f0571]::util::run_in_thread_pool_with_globals<rustc_interface[1a90780ba77f0571]::interface::run_compiler<core[ad5a27a180104093]::result::Result<(), rustc_span[35307b2b70fcf344]::ErrorGuaranteed>, rustc_driver_impl[c6327b079c7bb00b]::run_compiler::{closure#0}>::{closure#1}, core[ad5a27a180104093]::result::Result<(), rustc_span[35307b2b70fcf344]::ErrorGuaranteed>>::{closure#0}, core[ad5a27a180104093]::result::Result<(), rustc_span[35307b2b70fcf344]::ErrorGuaranteed>>::{closure#0}::{closure#0}, core[ad5a27a180104093]::result::Result<(), rustc_span[35307b2b70fcf344]::ErrorGuaranteed>>
+  31:     0x7f6c1ec9b53a - <<std[23d648ca06a6b5c2]::thread::Builder>::spawn_unchecked_<rustc_interface[1a90780ba77f0571]::util::run_in_thread_with_globals<rustc_interface[1a90780ba77f0571]::util::run_in_thread_pool_with_globals<rustc_interface[1a90780ba77f0571]::interface::run_compiler<core[ad5a27a180104093]::result::Result<(), rustc_span[35307b2b70fcf344]::ErrorGuaranteed>, rustc_driver_impl[c6327b079c7bb00b]::run_compiler::{closure#0}>::{closure#1}, core[ad5a27a180104093]::result::Result<(), rustc_span[35307b2b70fcf344]::ErrorGuaranteed>>::{closure#0}, core[ad5a27a180104093]::result::Result<(), rustc_span[35307b2b70fcf344]::ErrorGuaranteed>>::{closure#0}::{closure#0}, core[ad5a27a180104093]::result::Result<(), rustc_span[35307b2b70fcf344]::ErrorGuaranteed>>::{closure#1} as core[ad5a27a180104093]::ops::function::FnOnce<()>>::call_once::{shim:vtable#0}
+  32:     0x7f6c1ec9b92b - std::sys::pal::unix::thread::Thread::new::thread_start::h17951d08fc5208d5
+  33:     0x7f6c190a81f5 - start_thread
+                               at ./nptl/pthread_create.c:442:8
+  34:     0x7f6c1912889c - clone3
+                               at ./misc/../sysdeps/unix/sysv/linux/x86_64/clone3.S:81
+  35:                0x0 - <unknown>
+
+
+rustc version: 1.83.0-nightly (d6c8169c1 2024-09-03)
+platform: x86_64-unknown-linux-gnu
+
+query stack during panic:
+#0 [fn_arg_names] looking up function parameter names for `allocator::PageAllocator::PAGE_SIZE`
+#1 [resolver_for_lowering_raw] getting the resolver for lowering
+end of query stack

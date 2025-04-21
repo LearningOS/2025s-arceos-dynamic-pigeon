@@ -7,7 +7,7 @@ use crate::fs;
 pub(crate) fn devfs() -> Arc<fs::devfs::DeviceFileSystem> {
     let null = fs::devfs::NullDev;
     let zero = fs::devfs::ZeroDev;
-    let bar = fs::devfs::ZeroDev;
+    let bar: axfs_devfs::ZeroDev = fs::devfs::ZeroDev;
     let devfs = fs::devfs::DeviceFileSystem::new();
     let foo_dir = devfs.mkdir("foo");
     devfs.add("null", Arc::new(null));
@@ -17,8 +17,8 @@ pub(crate) fn devfs() -> Arc<fs::devfs::DeviceFileSystem> {
 }
 
 #[cfg(feature = "ramfs")]
-pub(crate) fn ramfs() -> Arc<fs::ramfs::RamFileSystem> {
-    Arc::new(fs::ramfs::RamFileSystem::new())
+pub(crate) fn ramfs() -> Arc<fs::ramfs::RamFs> {
+    Arc::new(fs::ramfs::RamFs::new())
 }
 
 #[cfg(feature = "procfs")]

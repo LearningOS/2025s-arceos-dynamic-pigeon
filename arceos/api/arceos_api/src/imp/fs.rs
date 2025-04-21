@@ -11,6 +11,8 @@ pub use axio::SeekFrom as AxSeekFrom;
 
 #[cfg(feature = "myfs")]
 pub use axfs::fops::{Disk as AxDisk, MyFileSystemIf};
+use axlog::info;
+use axlog::warn;
 
 /// A handle to an opened file.
 pub struct AxFileHandle(File);

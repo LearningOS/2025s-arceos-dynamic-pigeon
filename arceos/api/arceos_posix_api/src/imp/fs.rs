@@ -1,4 +1,6 @@
 use alloc::sync::Arc;
+use alloc::vec;
+use alloc::vec::Vec;
 use core::ffi::{c_char, c_int};
 
 use axerrno::{LinuxError, LinuxResult};
@@ -214,4 +216,25 @@ pub fn sys_rename(old: *const c_char, new: *const c_char) -> c_int {
         axfs::api::rename(old_path, new_path)?;
         Ok(0)
     })
+}
+
+
+pub fn read_file(fd: c_int, offset: usize, size: usize) -> LinuxResult<Vec<u8>> {
+    let file = get_file_like(fd)?;
+    let file_size = file.stat()?.st_size as usize;
+    let file = file
+        .into_any()
+        .downcast::<File>()
+        .map_err(|_| LinuxError::EBADF)?;
+
+    let file = file.inner.lock();
+    if offset >= file_size {
+        return Err(LinuxError::EINVAL);
+    }
+    let size = core::cmp::min(size, file_size - offset);
+
+    let mut buf = vec![0u8; size];
+    file.read_at(offset as u64, &mut buf)?;
+
+    Ok(buf)
 }
